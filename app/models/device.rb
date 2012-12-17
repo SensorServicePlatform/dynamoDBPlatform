@@ -1,5 +1,6 @@
 class Device < ActiveRecord::Base
     attr_accessible :guid, :uri, :device_type_id, :network_address, :metadata_json, :print_name
+    validates :uri, :uniqueness => true
 
     #has_many :device_registries
     has_and_belongs_to_many :device_agents

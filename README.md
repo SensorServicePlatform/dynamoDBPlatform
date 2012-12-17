@@ -14,7 +14,7 @@ High Priority:
 
 Medium Priority:
 
-6. *Sensor Types*: provide facility to edit conversion methods (a dropdown that allows you to pick threshold.Alternatively if you choose polynomial, then it displyas options to populate coefficient)
+6. *Sensor Types*: provide facility to edit conversion methods (a dropdown that allows you to pick threshold.Alternatively if you choose polynomial, then it displays options to populate coefficient)
 7. *Sensor Types*: The conversion mentioned above is from the manufacturer's documentation. If a general conversion is preferred like deg C to deg F, create a virtual sensor as a wrapper to this.
 8. *Device Agents*: The conversion mentioned above is from the manufacturer's documentation. If a general conversion is preferred like deg C to deg F, create a virtual sensor as a wrapper to this.
 9. *Device Agents*: Add a field for "polling interval". This indicates how often the device agent will poll/push data to the database. Either enter an interval, cron job or provide a dropdown for which script to execute for the polling.

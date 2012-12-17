@@ -12,6 +12,9 @@
 
 config/database.yml
 
+# Ignore Amazon DynamoDB's credential
+config/initializers/aws.rb
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp

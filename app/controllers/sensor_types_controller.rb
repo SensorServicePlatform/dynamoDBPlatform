@@ -47,7 +47,7 @@ class SensorTypesController < ApplicationController
     end
     def destroy
         @sensor_type = SensorType.find(params[:id])
-        @sensor_type.delete
+        @sensor_type.destroy
         flash[:notice] = "Sensor Type deleted successfully !"
         redirect_to :action => "index"
     end

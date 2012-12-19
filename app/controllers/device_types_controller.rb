@@ -8,7 +8,8 @@ class DeviceTypesController < ApplicationController
 
     def new
         if (!params[:device_type].blank? && !params[:version].blank? && !params[:manufacturer].blank?)
-            @device_type = DeviceType.new(:device_type => params[:device_type], :version => params[:version], :manufacturer => params[:manufacturer])
+            @device_type = DeviceType.new(:device_type => params[:device_type], :version => params[:version],
+                                          :manufacturer => params[:manufacturer], :default_config => params[:default_config])
             @device_type.save
             #redirect_to devices_path
         else
@@ -49,7 +50,7 @@ class DeviceTypesController < ApplicationController
     end
     def destroy
         @device_type = DeviceType.find(params[:id])
-        @device_type.delete
+        @device_type.destroy
         flash[:notice] = "Device Type deleted successfully !"
         redirect_to :action => "index"
     end

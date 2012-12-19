@@ -145,7 +145,7 @@ class DevicesController < ApplicationController
 
     def destroy
         @device = Device.find(params[:id])
-        @device.delete
+        @device.destroy
         flash[:notice] = "Device deleted successfully !"
         redirect_to :action => "index"
     end

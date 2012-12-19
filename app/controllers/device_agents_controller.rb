@@ -48,7 +48,7 @@ class DeviceAgentsController < ApplicationController
 
     def destroy
         @device_agent = DeviceAgent.find(params[:id])
-        @device_agent.delete
+        @device_agent.destroy
         flash[:notice] = "Device Agent deleted successfully !"
         redirect_to :action => "index"
     end

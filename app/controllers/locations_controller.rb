@@ -39,7 +39,7 @@ class LocationsController < ApplicationController
 
     def destroy
         @location = Location.find(params[:id])
-        @location.delete
+        @location.destroy
         flash[:notice] = "Location deleted successfully !"
         redirect_to :action => "index"
     end

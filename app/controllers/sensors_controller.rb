@@ -60,7 +60,7 @@ class SensorsController < ApplicationController
 
     def destroy
         @sensor = Sensor.find(params[:id])
-        @sensor.delete
+        @sensor.destroy
         flash[:notice] = "Sensor deleted successfully !"
         redirect_to :action => "index"
     end

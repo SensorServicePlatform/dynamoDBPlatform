@@ -8,6 +8,7 @@
             <td>device_type</td>
             <td>manufacturer</td>
             <td>version</td>
+            <td>default_config</td>
             <td>metadata_json</td>
             <td colspan='2'>Actions</td>
         </tr>
@@ -16,6 +17,7 @@
             <td><%= device_type.device_type %></td>
             <td><%= device_type.manufacturer %></td>
             <td><%= device_type.version %></td>
+            <td><%= device_type.default_config %></td>
             <td><%= device_type.metadata_json %></td>
             <td><%= link_to 'Edit', edit_device_type_path(device_type) %></td>
             <td><%= link_to 'Delete', device_type, confirm: 'Are you sure?', method: :delete %></td>

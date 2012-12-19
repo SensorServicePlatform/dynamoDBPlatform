@@ -14,7 +14,7 @@
         <tr>
             <td><%= sensor.guid %></td>
             <td><%= sensor.sensor_type_id %></td>
-            <td><%= link_to sensor.device.uri, device_path(sensor.device) %></td>
+            <td><% unless sensor.device.nil? %><%= link_to sensor.device.uri, device_path(sensor.device) %><% end %></td>
             <td><%= link_to 'Edit', edit_sensor_path(sensor) %></td>
             <td><%= link_to 'Delete', sensor, confirm: 'Are you sure?', method: :delete %></td>
         </tr>

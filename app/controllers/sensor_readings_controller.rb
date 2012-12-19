@@ -2,7 +2,7 @@ require "aws"
 
 class SensorReadingsController < ApplicationController
   respond_to :html, :json
-  before_filter :initialize_dynmodb
+  before_filter :initialize_dynamodb
 
   #def index
   #  json_array = []
@@ -45,9 +45,10 @@ class SensorReadingsController < ApplicationController
     # have the expected 'attributes' hash
     readings = readings.to_a
 
-    readings.each do |reading|
-      run_conversions(reading)
-    end
+    # TODO: re-work on conversion
+    #readings.each do |reading|
+    #  run_conversions(reading)
+    #end
 
     json_array = []
 
@@ -100,7 +101,7 @@ class SensorReadingsController < ApplicationController
     render :text => "Success", :status => 200, :content_type => 'text/html'
   end
 
-  def initialize_dynmodb
+  def initialize_dynamodb
     sensor_readings_table_name = "SensorReadingV3"
     db = AWS::DynamoDB.new
     @sensor_reading_table = db.tables[sensor_readings_table_name].load_schema

@@ -102,7 +102,7 @@ class SensorReadingsController < ApplicationController
   end
 
   def initialize_dynamodb
-    sensor_readings_table_name = "SensorReadingV3"
+    sensor_readings_table_name = "SensorReadingV6"
     db = AWS::DynamoDB.new
     @sensor_reading_table = db.tables[sensor_readings_table_name].load_schema
   end

@@ -5,12 +5,12 @@ require "aws"
 DB = AWS::DynamoDB.new
 TABLES = {}
 
-sensor_readings_table_name = "SensorReadingV5"
+sensor_readings_table_name = "SensorReadingV3"
 
 {
     sensor_readings_table_name => {
         hash_key: {id: :string},
-        range_key: {timestamp: :string}
+        range_key: {timestamp: :number}
     }
 }.each_pair do |table_name, schema|
   begin
@@ -29,7 +29,7 @@ print TABLES[sensor_readings_table_name]
 
 sample_json=
     '{
-        "acc_z" : 1005,
+    "acc_z" : 1005,
     "bat" : 1005,
     "gpio_state" : 1,
     "temp" : 510,
@@ -50,7 +50,7 @@ sample_json=
 
 # add an individual item
 item = TABLES[sensor_readings_table_name].items.create('id' => '12345',
-                                                       'timestamp' => '1353441771000',
+                                                       'timestamp' => 1353441771000,
                                                        'temp' => '510',
                                                        'acc_x' => '336',
                                                        'acc_y' => '344',
@@ -62,10 +62,10 @@ item = TABLES[sensor_readings_table_name].items.create('id' => '12345',
 TABLES[sensor_readings_table_name].batch_write(
     :put => [
         {'id' => '12351',
-         'timestamp' => '1353441771000',
+         'timestamp' => 1353441771000,
          'temp' => '510'},
         {'id' => '12352',
-         'timestamp' => '1353441771000',
+         'timestamp' => 1353441771000,
          'temp' => '510'}
     ]
 )

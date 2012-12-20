@@ -1,0 +1,6 @@
+# rvm install ruby-1.9.3-p194
+# rvm --default use ruby-1.9.2-p180
+# rvm gemset create cmu_sds
+# rvm 1.9.3-p194@cmu_sds
+
+rvm --create use ruby-1.9.3-p194@cmu_sds

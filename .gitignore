@@ -25,3 +25,7 @@ coverage/*
 doc/coverage/*
 *DS_Store
 .rspec
+
+# Sublime Text 2 Project
+*.sublime-project
+*.sublime-workspace

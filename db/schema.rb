@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207032246) do
+ActiveRecord::Schema.define(:version => 20121226164452) do
 
   create_table "conversions", :force => true do |t|
     t.integer  "device_type_id"
@@ -44,13 +44,14 @@ ActiveRecord::Schema.define(:version => 20121207032246) do
   end
 
   create_table "device_types", :force => true do |t|
-    t.string   "device_type"
+    t.string   "device_type_desc"
     t.string   "version"
     t.string   "manufacturer"
     t.string   "metadata_json"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.string   "default_config"
+    t.string   "device_type_key"
   end
 
   create_table "devices", :force => true do |t|
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20121207032246) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.string   "network_address"
+    t.string   "physical_location"
     t.integer  "sensor_id"
     t.string   "device_agent_guid"
     t.string   "print_name"
@@ -91,10 +93,11 @@ ActiveRecord::Schema.define(:version => 20121207032246) do
   end
 
   create_table "sensor_types", :force => true do |t|
-    t.string   "property_type"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.string   "property_type_desc"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "metadata_json"
+    t.string   "property_type_key"
   end
 
   create_table "sensors", :force => true do |t|

@@ -1,4 +1,4 @@
 class DeviceType < ActiveRecord::Base
-    attr_accessible :device_type, :version, :manufacturer, :metadata_json, :default_config
+    attr_accessible :device_type_key, :device_type_desc, :version, :manufacturer, :metadata_json, :default_config
     has_many :devices
 end

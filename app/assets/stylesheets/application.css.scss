@@ -15,6 +15,12 @@
  */
 @import "twitter/bootstrap";
 
+// ---- Type definitions --------
+$sans: "PT Sans", "Lucida Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$serif: Georgia, Times, "Times New Roman", serif !default;
+$mono: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace !default;
+
+
 .main-div {
   margin-top: 60px;
   margin-bottom: 51px;
@@ -157,4 +163,15 @@ img {
 
 .container .table td{
   border: 1px solid gray;
+}
+
+#error_explanation {
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid red;
+  background: white;
+
+  color: red;
+  font-family: $sans;
+  h4{text-align: center;}
 }

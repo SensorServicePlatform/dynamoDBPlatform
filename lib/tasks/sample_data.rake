@@ -127,23 +127,23 @@ namespace :db do
 
     # populate Device Types
     [
-        {:device_type => "Firefly_v2", :version => "", :manufacturer => "CMU",
+        {:device_type_desc => "Firefly V2", :device_type_key => "firefly_v2", :version => "", :manufacturer => "CMU",
         :default_config =>
-            "{\"property_type\": [
-                \"Temperature\",
-                \"Digital Temperature\",
-                \"Light\",
-                \"Pressure\",
-                \"Humidity\",
-                \"Motion\",
-                \"Audio P2P\",
-                \"Accelerometer x\",
-                \"Accelerometer y\",
-                \"Accelerometer z\"]}" }
+            "{\"property_type_key\": [
+                \"temperature\",
+                \"digital temperature\",
+                \"light\",
+                \"pressure\",
+                \"humidity\",
+                \"motion\",
+                \"audio_p2p\",
+                \"accelerometer_x\",
+                \"accelerometer_y\",
+                \"accelerometer_z\"]}" }
     ].each do |attributes|
       DeviceType.create(attributes)
     end
-    firefly_device_type = DeviceType.find_by_device_type("Firefly_v2")
+    firefly_device_type = DeviceType.find_by_device_type_key("firefly_v2")
 
     # populate Devices
     [{
@@ -164,8 +164,8 @@ namespace :db do
     end
     firefly_device_1 = Device.find_by_uri("1.b19.device.sv.cmu.edu")
     default_config_json = JSON.parse(firefly_device_type.default_config)
-    default_config_json["property_type"].each do |pt|
-        st = SensorType.create(:property_type => pt)
+    default_config_json["property_type_key"].each do |pt|
+        st = SensorType.create(:property_type_key => pt, :property_type_desc => pt)
         # create one sensor of this sensor-type
         s = Sensor.create({ :uri => "d" || firefly_device_1.id  ||".sensor.b19.sv.cmu.edu", :sensor_type_id => st.id, :device_id => firefly_device_1.id })
         firefly_device_1.sensors << s

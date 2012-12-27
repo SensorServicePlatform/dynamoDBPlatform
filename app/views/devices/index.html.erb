@@ -15,7 +15,7 @@
         <tr>
             <td><%= link_to device.uri, edit_device_path(device) %></td>
             <td><% unless device.device_type.blank? %>
-                <%= device.device_type.device_type %>
+                <%= device.device_type.device_type_desc %>
                 <% end %></td>
             <td><%= device.network_address %></td>
             <td><% unless device.location.blank? %>

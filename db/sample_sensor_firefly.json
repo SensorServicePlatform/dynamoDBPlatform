@@ -19,3 +19,7 @@
 
 // GPS coordinates for Room 1055 in Decimal Degress
 // 37.412251N,-122.058964W
+
+
+// curl -v -H "Content-Type: application/json" -X POST -d '{"temp": 510, "timestamp": 1353441771000, "id": "1"}' \
+// http://cmu-sds.herokuapp.com/sensor_readings

@@ -5,7 +5,7 @@ require "aws"
 DB = AWS::DynamoDB.new
 TABLES = {}
 
-sensor_readings_table_name = "SensorReadingV6"
+sensor_readings_table_name = "SensorReadingV7"
 
 {
     sensor_readings_table_name => {

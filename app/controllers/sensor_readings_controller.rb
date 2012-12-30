@@ -33,11 +33,11 @@ class SensorReadingsController < ApplicationController
       readings = @sensor_reading_table.items.query(
           :hash_value => id,
           :range_value => start_time..end_time,
-          :select => [:id, :temp, :timestamp])
+          :select => :all)
     else
       readings = @sensor_reading_table.items.query(
           :hash_value => id,
-          :select => [:id, :temp, :timestamp])
+          :select => :all)
     end
 
     # Convert the Enumerator to an Array so that we can index into it.
@@ -78,6 +78,7 @@ class SensorReadingsController < ApplicationController
         json_array << {
             :id => id,
             :temp => reading.attributes["temp"],
+            :digital_temp => reading.attributes["digital_temp"],
             :timestamp => reading.attributes["timestamp"]
         }
       end
@@ -102,7 +103,7 @@ class SensorReadingsController < ApplicationController
   end
 
   def initialize_dynamodb
-    sensor_readings_table_name = "SensorReadingV6"
+    sensor_readings_table_name = "SensorReadingV7"
     db = AWS::DynamoDB.new
     @sensor_reading_table = db.tables[sensor_readings_table_name].load_schema
   end

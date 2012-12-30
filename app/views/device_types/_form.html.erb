@@ -1,7 +1,7 @@
 <%= form_for(@device_type) do |f| %>
     <% if @device_type.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@device_type.errors.count, "error") %> prohibited this device from being registered:</h2>
+          <h4><%= pluralize(@device_type.errors.count, "error") %> prohibited this device from being registered:</h4>
 
           <ul>
             <% @device_type.errors.full_messages.each do |msg| %>
@@ -12,23 +12,27 @@
     <% end %>
     <table>
       <tr>
-        <td class="field" width="50%"><%= f.label :device_type %></td>
-        <td class="field"><%= f.text_field :device_type %></td>
+        <td class="field" width="50%"><%= f.label :device_type_desc, "Device Type Description" %></td>
+        <td class="field"><%= f.text_field :device_type_desc %></td>
       </tr>
       <tr>
-        <td class="field" width="50%"><%= f.label :manufacturer %></td>
+        <td class="field"><%= f.label :device_type_key, "Device Type Key" %></td>
+        <td class="field"><%= f.text_field :device_type_key %></td>
+      </tr>
+      <tr>
+        <td class="field"><%= f.label :manufacturer %></td>
         <td class="field"><%= f.text_field :manufacturer %></td>
       </tr>
       <tr>
-        <td class="field" width="50%"><%= f.label :version %></td>
+        <td class="field"><%= f.label :version %></td>
         <td class="field"><%= f.text_field :version %></td>
       </tr>
       <tr>
-        <td class="field" width="50%"><%= f.label :metadata_json %></td>
+        <td class="field"><%= f.label :metadata_json %></td>
         <td class="field"><%= f.text_field :metadata_json %></td>
       </tr>
       <tr>
-        <td class="field" width="50%"><%= f.label :default_configuration %></td>
+        <td class="field"><%= f.label :default_configuration %></td>
         <td class="field"><%= f.text_area   :default_config, :rows => '8',
                                              :value => "{ \"property_type\": [\"Temperature\",\"Digital Temperature\",\"Light\",\"Pressure\", \"Humidity\", \"Motion\", \"Audio P2P\", \"Accelerometer x\", \"Accelerometer y\", \"Accelerometer z\"]}"
                                                 %></td>

@@ -7,8 +7,8 @@ class DeviceTypesController < ApplicationController
     end
 
     def new
-        if (!params[:device_type].blank? && !params[:version].blank? && !params[:manufacturer].blank?)
-            @device_type = DeviceType.new(:device_type => params[:device_type], :version => params[:version],
+        if (!params[:device_type_key].blank? && !params[:version].blank? && !params[:manufacturer].blank?)
+            @device_type = DeviceType.new(:device_type_key => params[:device_type_key], :device_type_desc => params[:device_type_desc], :version => params[:version],
                                           :manufacturer => params[:manufacturer], :default_config => params[:default_config])
             @device_type.save
             #redirect_to devices_path

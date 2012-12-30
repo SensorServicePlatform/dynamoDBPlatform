@@ -18,7 +18,7 @@
       </tr>
       <tr>
         <td class="field"><%= f.label :sensor_type_id %></td>
-        <td class="field"><%= f.select("sensor_type_id", options = @sensor_types.map { |s| [s.property_type, s.id] }) %></td>
+        <td class="field"><%= f.select("sensor_type_id", options = @sensor_types.map { |s| [s.property_type_desc, s.id] }) %></td>
       </tr>
       <tr>
         <td class="field"><%= f.label :min_value %></td>

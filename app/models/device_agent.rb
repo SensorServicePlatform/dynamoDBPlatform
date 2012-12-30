@@ -1,6 +1,7 @@
 class DeviceAgent < ActiveRecord::Base
 	attr_accessible :guid, :uri, :network_address, :print_name, :metadata_json
   validates :uri, :uniqueness => true
+  validates :metadata_json, :json_format => true
 	has_and_belongs_to_many :devices
 	has_one :location, :dependent => :destroy
 

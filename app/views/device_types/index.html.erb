@@ -5,7 +5,7 @@
 
     <table class="table">
         <tr>
-            <td>device_type</td>
+            <td>device_type_desc</td>
             <td>manufacturer</td>
             <td>version</td>
             <td>default_config</td>
@@ -14,7 +14,7 @@
         </tr>
         <% @device_types.each do |device_type| %>
         <tr>
-            <td><%= device_type.device_type %></td>
+            <td><%= device_type.device_type_desc %></td>
             <td><%= device_type.manufacturer %></td>
             <td><%= device_type.version %></td>
             <td><%= device_type.default_config %></td>

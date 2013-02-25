@@ -12,6 +12,10 @@ gem 'aws-sdk', '1.7.1'
 gem 'bootstrap-sass-rails'
 gem 'heroku'
 
+gem 'delayed_job_active_record'
+gem 'daemons'
+gem 'workless', '~> 1.1.1'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

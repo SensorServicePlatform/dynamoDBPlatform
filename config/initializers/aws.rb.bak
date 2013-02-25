@@ -1,0 +1,5 @@
+# This is Jia's account credential. Should not be checked in to git repo
+AWS.config({
+    :access_key_id => 'AKIAJUZBAF6AZ5X3KZNQ',
+    :secret_access_key => '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'
+})

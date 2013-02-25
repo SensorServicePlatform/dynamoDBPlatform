@@ -34,4 +34,9 @@ CmuSds::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # For workless of delayed_job
+  config.after_initialize do
+    Delayed::Job.scaler = :heroku_cedar
+  end
 end

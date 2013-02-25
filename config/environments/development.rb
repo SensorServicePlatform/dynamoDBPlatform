@@ -34,4 +34,9 @@ CmuSds::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # For workless of delayed_job
+  config.after_initialize do 
+    Delayed::Job.scaler = :heroku_cedar
+  end
 end

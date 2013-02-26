@@ -7,8 +7,7 @@
             <td>Latitude</td>
             <td>Longitude</td>
             <td>Altitude</td>
-            <td>physical_location</td>
-            <td>device_agent_guid</td>
+            <td>description</td>
             <td colspan='2'>Actions</td>
         </tr>
         <% @locations.each do |location| %>
@@ -16,7 +15,7 @@
             <td><%= location.lat %></td>
             <td><%= location.lon %></td>
             <td><%= location.alt %></td>
-            <td><%=  %></td>
+            <td><%= location.print_name %></td>
             <td><%= link_to 'Edit', edit_location_path(location) %></td>
             <td><%= link_to 'Delete', location, confirm: 'Are you sure?', method: :delete %></td>
         </tr>

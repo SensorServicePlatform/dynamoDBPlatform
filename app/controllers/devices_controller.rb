@@ -13,6 +13,7 @@ class DevicesController < ApplicationController
           if d.location.nil?
             loc = {:lat => '', :lon => '', :alt => ''}
           else
+            loc[:print_name] = d.location.print_name.nil? ? nil : d.location.print_name
             loc[:lat] = d.location.lat.nil? ? nil : d.location.lat
             loc[:lon] = d.location.lon.nil? ? nil : d.location.lon
             loc[:alt] = d.location.alt.nil? ? nil : d.location.alt
@@ -52,6 +53,7 @@ class DevicesController < ApplicationController
         if @device.save
 
           @location = Location.create({
+              :print_name => params[:print_name],
               :lat => params[:lat],
               :lon => params[:lon],
               :alt => params[:alt],
@@ -71,27 +73,28 @@ class DevicesController < ApplicationController
             temp_device_uri = temp_device_uri.sub(/\.device\.sv\.cmu\.edu/, '')
             # @device.uri = @device.id.to_s << "." << @device.uri << ".device.sv.cmu.edu"
 
-
+            # TODO
             # replace with property_type
-            default_config_json["property_type"].each do |pt|
-              # find Sensor type with property pt
-              st = SensorType.find_by_property_type(pt)
-              # create Sensor with this Sensor Type
-              [{
-                   :uri => ".sensor.sv.cmu.edu",
-                   :sensor_type_id => st.id,
-                   :uri => @device.uri,
-                   :device_id => @device.id
-               }].each do |attributes|
-                s = Sensor.create(attributes)
-                s.uri = s.id.to_s << "." << temp_device_uri << s.uri
-                s.save
-                # add this Sensor to the Sensor Type
-                st.sensors << s
-                # add Sensor to the device
-                @device.sensors << s
-              end
-            end
+            #default_config_json["property_type"].each do |pt|
+            #  # find Sensor type with property pt
+            #  st = SensorType.find_by_property_type(pt)
+            #  # create Sensor with this Sensor Type
+            #  [{
+            #       :uri => ".sensor.sv.cmu.edu",
+            #       :sensor_type_id => st.id,
+            #       :uri => @device.uri,
+            #       :device_id => @device.id
+            #   }].each do |attributes|
+            #    s = Sensor.create(attributes)
+            #    s.uri = s.id.to_s << "." << temp_device_uri << s.uri
+            #    s.save
+            #    # add this Sensor to the Sensor Type
+            #    st.sensors << s
+            #    # add Sensor to the device
+            #    @device.sensors << s
+            #  end
+            #end
+
             @device.save
           end
 
@@ -124,6 +127,7 @@ class DevicesController < ApplicationController
         respond_to do |format|
             if @device.update_attributes(params[:device])
                 @location = Location.create({
+                    :print_name => params[:print_name],
                     :lat => params[:lat],
                     :lon => params[:lon],
                     :alt => params[:alt],

@@ -19,7 +19,10 @@
                 <% end %></td>
             <td><%= device.network_address %></td>
             <td><% unless device.location.blank? %>
-                <%= "lat: #{device.location.lat}" unless device.location.lat.nil? %><%= ", lon: #{device.location.lon}" unless device.location.lon.nil? %><%= ", alt: #{device.location.alt}" unless device.location.alt.nil? %>
+                <%= "description:#{device.location.print_name}, " unless device.location.print_name.nil? %>
+                <%= "lat:#{device.location.lat}, " unless device.location.lat.nil? %>
+                <%= "lon:#{device.location.lon}, " unless device.location.lon.nil? %>
+                <%= "alt:#{device.location.alt}" unless device.location.alt.nil? %>
             <% end %></td>
             <td><%= link_to 'Edit', edit_device_path(device) %></td>
             <td><%= link_to 'Delete', device, confirm: 'Are you sure?', method: :delete %></td>

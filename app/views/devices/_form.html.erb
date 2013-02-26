@@ -39,6 +39,10 @@
         <td class="field"><%= f.text_field :network_address %></td>
       </tr>
       <tr>
+        <td class="field"><%= f.label :location_description %></td>
+        <td class="field"><input type='text' name='print_name' value="<%= @location.print_name %>" /></td>
+      </tr>
+      <tr>
         <td class="field"><%= f.label :latitude %></td>
         <td class="field"><input type='text' name='lat' value="<%= @location.lat %>" /></td>
       </tr>

@@ -10,12 +10,12 @@ class LocationsController < ApplicationController
         @location = Location.new
     end
     def create
-        @location = Location.new(params[:sensor])
+        @location = Location.new(params[:location])
         if @location.save
-            flash[:notice] = "Sensor created successfully !"
+            flash[:notice] = "Location created successfully !"
             redirect_to :action => "index"
         else
-            flash[:error] = "Couldn't create the Sensor. Please try again."
+            flash[:error] = "Couldn't create the Location. Please try again."
             render "new"
         end
     end
@@ -27,7 +27,7 @@ class LocationsController < ApplicationController
         @location = Location.find(params[:id])
         respond_to do |format|
             if @location.update_attributes(params[:sensor])
-                flash[:notice] = 'Sensor  was successfully updated.'
+                flash[:notice] = 'Location was successfully updated.'
                 format.html { redirect_to :action => "index" }
                 format.json { head :no_content }
             else

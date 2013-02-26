@@ -24,6 +24,11 @@ class SensorReadingsController < ApplicationController
 
   def show
     id = params[:id]
+    # temporary solution to query device location
+    device = Device.find_by_network_address(id)
+    if !device.nil?
+      device_loc = device.location.print_name
+    end
     start_time = params[:start_time].to_i
     end_time = params[:end_time].to_i
     number_of_tuples = params[:tuples].to_i
@@ -64,6 +69,7 @@ class SensorReadingsController < ApplicationController
           tuple_temp_readings = tuple_readings.collect { |r| r.attributes["temp"] }
           json_array << {
               :id => id,
+              :loc => device_loc,
               :average_timestamp => tuple_timestamps.average,
               :first => tuple_temp_readings.first,
               :last => tuple_temp_readings.last,

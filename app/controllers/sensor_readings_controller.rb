@@ -70,7 +70,7 @@ class SensorReadingsController < ApplicationController
           json_array << {
               :id => id,
               :loc => device_loc,
-              :average_timestamp => tuple_timestamps.average,
+              :average_timestamp => tuple_timestamps.average.round,
               :first => tuple_temp_readings.first,
               :last => tuple_temp_readings.last,
               :min => tuple_temp_readings.min,

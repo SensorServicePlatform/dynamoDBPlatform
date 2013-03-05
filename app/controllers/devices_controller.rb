@@ -24,7 +24,7 @@ class DevicesController < ApplicationController
             :uri => d.uri,
             :print_name => d.print_name,
             :location => loc,
-            :sensors => d.sensors.collect{|s| Hash[s.guid => s.sensor_type.property_type]}
+            :sensors => d.sensors.collect{|s| Hash[s.guid => s.sensor_type.property_type_desc]}
           ]
         }
         render :json => device_hash

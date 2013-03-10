@@ -1,5 +1,5 @@
 class Device < ActiveRecord::Base
-    attr_accessible :guid, :uri, :device_type_id, :network_address, :metadata_json, :print_name
+    attr_accessible :guid, :uri, :device_type_id, :device_agent_guid, :network_address, :metadata_json, :print_name
     validates :uri, :uniqueness => true
     validates :metadata_json, :json_format => true
 

@@ -21,6 +21,6 @@ class SensorReading < ActiveRecord::Base
     sensor_readings_table_name = "SensorReadingV7"
     db = AWS::DynamoDB.new
     @sensor_reading_table = db.tables[sensor_readings_table_name].load_schema
-    self.pull_readings @sensor_reading_table
+    #$self.pull_readings @sensor_reading_table
   end
 end

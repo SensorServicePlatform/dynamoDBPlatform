@@ -33,10 +33,6 @@
         <td class="field"><%= f.select("device_guid", options = @devices.map { |d| [d.uri, d.id] }) %></td>
       </tr>
       <tr>
-        <td class="field"><%= f.label :predecessor %></td>
-        <td class="field"><%= f.text_field :predecessor %></td>
-      </tr>
-      <tr>
         <td class="field"><%= f.label :metadata_json %></td>
         <td class="field"><%= f.text_field :metadata_json %></td>
       </tr>

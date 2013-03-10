@@ -6,8 +6,10 @@ class SensorTypesController < ApplicationController
     end
 
     def new
-        if (!params[:property_type].blank?)
-            @sensor_type = SensorType.new(:property_type => params[:property_type], :metadata_json => params[ :metadata_json])
+        if (!params[:property_type_key].blank?)
+            @sensor_type = SensorType.new(:property_type_key => params[:property_type_key],
+                                          :property_type_desc => params[:property_type_desc],
+                                          :metadata_json => params[:metadata_json])
             @sensor_type.save
             #redirect_to devices_path
         else

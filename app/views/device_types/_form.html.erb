@@ -34,21 +34,20 @@
       <tr>
         <td class="field"><%= f.label :default_configuration %></td>
         <td class="field"><%= f.text_area   :default_config, :rows => '8',
-                                             :value => "{ \"property_type\": [\"Temperature\",\"Digital Temperature\",\"Light\",\"Pressure\", \"Humidity\", \"Motion\", \"Audio P2P\", \"Accelerometer x\", \"Accelerometer y\", \"Accelerometer z\"]}"
-                                                %></td>
+                                            :value => "{ \"sensor_type_and_name\":[[\"Temperature\", \"temp\"],[\"Digital Temperature\", \"digital_temp\"],[\"Light\", \"light\"],[\"Pressure\", \"pressure\"],[\"Humidity\", \"humidity\"],[\"Motion\", \"motion\"],[\"Audio P2P\", \"audio_p2p\"],[\"Accelerometer x\", \"acc_x\"],[\"Accelerometer y\", \"acc_y\"],[\"Accelerometer z\", \"acc_x\"]]}" %></td>
             <!--
-                sample json for Firefly config
-                 {"property_type": [
-                "Temperature",
-                "Digital Temperature",
-                "Light",
-                "Pressure",
-                "Humidity",
-                "Motion",
-                "Audio P2P",
-                "Accelerometer x",
-                "Accelerometer y",
-                "Accelerometer z"]}
+                sample json for Firefly config. value is [device_type, print_name]
+                 {"sensor_type_and_name": [
+                    ["Temperature","temp"],
+                    ["Digital Temperature","digital_temp"],
+                    ["Light","light"],
+                    ["Pressure","pressure"],
+                    ["Humidity","humidity"],
+                    ["Motion","motion"],
+                    ["Audio P2P","audio_p2p"],
+                    ["Accelerometer x","acc_x"],
+                    ["Accelerometer y","acc_y"],
+                    ["Accelerometer z","acc_z"]]}
              -->
       </tr>
       <tr>

@@ -14,9 +14,9 @@ class DeviceTypesController < ApplicationController
             #redirect_to devices_path
         else
             @device_type = DeviceType.new
-                respond_to do |format|
-                format.html
-                format.json { render json: @device_type }
+            respond_to do |format|
+            format.html
+            format.json { render json: @device_type }
             end
         end
     end

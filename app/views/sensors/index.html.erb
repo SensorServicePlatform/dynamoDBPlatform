@@ -5,16 +5,16 @@
 
     <table class="table">
         <tr>
-            <td>guid</td>
-            <td>Sensor Type</td>
             <td>Parent Device</td>
+            <td>Print Name</td>
+            <td>Sensor Type</td>
             <td colspan='2'>Actions</td>
         </tr>
         <% @sensors.each do |sensor| %>
         <tr>
-            <td><%= sensor.guid %></td>
-            <td><%= sensor.sensor_type_id %></td>
             <td><% unless sensor.device.nil? %><%= link_to sensor.device.uri, device_path(sensor.device) %><% end %></td>
+            <td><%= sensor.print_name %></td>
+            <td><%= sensor.sensor_type.property_type_desc %></td>
             <td><%= link_to 'Edit', edit_sensor_path(sensor) %></td>
             <td><%= link_to 'Delete', sensor, confirm: 'Are you sure?', method: :delete %></td>
         </tr>

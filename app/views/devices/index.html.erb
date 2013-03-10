@@ -7,6 +7,7 @@
         <tr>
             <td>Device URI</td>
             <td>Device Type</td>
+            <td>Device Agent</td>
             <td>network_address</td>
             <td>physical_location</td>
             <td colspan='2'>Actions</td>
@@ -17,12 +18,16 @@
             <td><% unless device.device_type.blank? %>
                 <%= device.device_type.device_type_desc %>
                 <% end %></td>
+            <td><% unless device.device_agents.blank? %>
+                <% device.device_agents.each do |da| %>
+                  <%= "#{da.print_name} " %>
+                <% end %><% end %></td>
             <td><%= device.network_address %></td>
             <td><% unless device.location.blank? %>
-                <%= "description:#{device.location.print_name}, " unless device.location.print_name.nil? %>
-                <%= "lat:#{device.location.lat}, " unless device.location.lat.nil? %>
-                <%= "lon:#{device.location.lon}, " unless device.location.lon.nil? %>
-                <%= "alt:#{device.location.alt}" unless device.location.alt.nil? %>
+                <%= "#{device.location.print_name} " unless device.location.print_name.blank? %>
+                <%= "lat:#{device.location.lat} " unless device.location.lat.blank? %>
+                <%= "lon:#{device.location.lon} " unless device.location.lon.blank? %>
+                <%= "alt:#{device.location.alt}" unless device.location.alt.blank? %>
             <% end %></td>
             <td><%= link_to 'Edit', edit_device_path(device) %></td>
             <td><%= link_to 'Delete', device, confirm: 'Are you sure?', method: :delete %></td>

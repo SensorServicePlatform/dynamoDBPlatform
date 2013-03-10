@@ -8,8 +8,9 @@
             <td>Device URI</td>
             <td>Device Type</td>
             <td>Device Agent</td>
-            <td>network_address</td>
-            <td>physical_location</td>
+            <td>Network_address</td>
+            <td>Location</td>
+            <td>Last_reading_at</td>
             <td colspan='2'>Actions</td>
         </tr>
         <% @devices.each do |device| %>
@@ -29,6 +30,7 @@
                 <%= "lon:#{device.location.lon} " unless device.location.lon.blank? %>
                 <%= "alt:#{device.location.alt}" unless device.location.alt.blank? %>
             <% end %></td>
+            <td><%= Time.at(device.last_reading_at).to_datetime.to_formatted_s(:db) unless device.last_reading_at.blank? %></td>
             <td><%= link_to 'Edit', edit_device_path(device) %></td>
             <td><%= link_to 'Delete', device, confirm: 'Are you sure?', method: :delete %></td>
         </tr>

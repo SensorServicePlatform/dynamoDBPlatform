@@ -88,16 +88,29 @@ class SensorReadingsController < ApplicationController
     render :json => json_array
   end
 
+  def update_last_reading_time(reading)
+    # reading's id is device's network address
+    device = Device.find_by_network_address(reading["id"])
+    if !device.nil?
+      device.last_reading_at = reading["timestamp"]
+      device.save
+    end
+  end
+
   def create
     reading_json = request.body.read
     reading_hash = ActiveSupport::JSON.decode(reading_json)
 
     if (reading_hash.is_a? Array)
       @sensor_reading_table.batch_write(
-          :put => reading_hash
+        :put => reading_hash
       )
+      reading_hash.each do |reading|
+        update_last_reading_time(reading)
+      end
     else
       @sensor_reading_table.items.create(reading_hash)
+      update_last_reading_time(reading_hash)
     end
 
     render :text => "Success", :status => 200, :content_type => 'text/html'

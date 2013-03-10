@@ -7,14 +7,14 @@
 		<table class="field" width="50%">
 		<thead>
 			<tr>
-				<td><u>Location</u></td>
 				<td><u>URI</u></td>
-		<% @devices.each do |d| %>
-			<tr>
-				<td><%= link_to d.print_name, edit_device_agent_path(d) %></td>
-				<td><%= link_to d.uri, edit_device_agent_path(d) %></td>
-			</tr>
-		<% end %>
+				<td><u>Location</u></td>
+                <% @devices.each do |d| %>
+                    <tr>
+                        <td><%= link_to d.uri, edit_device_agent_path(d) %></td>
+                        <td><%= link_to d.location.print_name, edit_device_agent_path(d) %></td>
+                    </tr>
+                <% end %>
 	</table><br />
 <%= link_to 'Back', devices_path %>
 </div>

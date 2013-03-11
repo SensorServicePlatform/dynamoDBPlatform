@@ -23,6 +23,7 @@ class DevicesController < ApplicationController
             :guid => d.guid,
             :uri => d.uri,
             :print_name => d.print_name,
+            :device_agent => d.device_agents,
             :location => loc,
             :sensors => d.sensors.collect{|s| Hash[s.guid => s.sensor_type.property_type_desc]}
           ]

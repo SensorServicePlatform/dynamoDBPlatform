@@ -91,8 +91,13 @@ class SensorReadingsController < ApplicationController
   def update_last_reading_time(reading)
     # reading's id is device's network address
     device = Device.find_by_network_address(reading["id"])
+    unix_epoch_time = reading["timestamp"]
+    if (unix_epoch_time.to_s.length == 13)
+      # timestamp is in milliseconds eg. 1363041237000
+      unix_epoch_time = unix_epoch_time / 1000
+    end
     if !device.nil?
-      device.last_reading_at = reading["timestamp"]
+      device.last_reading_at = unix_epoch_time
       device.save
     end
   end

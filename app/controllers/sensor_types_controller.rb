@@ -8,13 +8,16 @@ class SensorTypesController < ApplicationController
     def get_sensors_by_type
       @sensor_type = SensorType.find_by_property_type_desc(params[:type])
       if !@sensor_type.nil?
-        sensor_hash = @sensor_type.sensors.collect { |s|
-          Hash[
-              :device => s.device.nil? ? nil : s.device.uri,
-              :print_name => s.print_name,
-              :sensor_type => @sensor_type.property_type_desc
-          ]
-        }
+        @sensors = Sensor.find_all_by_sensor_type_id(@sensor_type.id)
+        if !@sensors.nil?
+          sensor_hash = @sensors.map { |s|
+            Hash[
+                :device => s.device.nil? ? nil : s.device.uri,
+                :print_name => s.print_name,
+                :sensor_type => @sensor_type.property_type_desc
+            ]
+          }
+        end
       end
       render :json => sensor_hash
     end

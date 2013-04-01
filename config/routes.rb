@@ -11,5 +11,6 @@ CmuSds::Application.routes.draw do
   resources :sensors
 
   match '/get_devices' => 'devices#get_devices'
+  match '/get_sensors' => 'sensor_types#get_sensors_by_type'
   match ':controller(/:action(/:id))(.:format)'
 end

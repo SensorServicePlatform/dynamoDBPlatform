@@ -5,6 +5,20 @@ class SensorTypesController < ApplicationController
         respond_with @sensor_types
     end
 
+    def get_sensors_by_type
+      @sensor_type = SensorType.find_by_property_type_desc(params[:type])
+      if !@sensor_type.nil?
+        sensor_hash = @sensor_type.sensors.collect { |s|
+          Hash[
+              :device => s.device.nil? ? nil : s.device.uri,
+              :print_name => s.print_name,
+              :sensor_type => @sensor_type.property_type_desc
+          ]
+        }
+      end
+      render :json => sensor_hash
+    end
+
     def new
         if (!params[:property_type_key].blank?)
             @sensor_type = SensorType.new(:property_type_key => params[:property_type_key],
@@ -20,6 +34,7 @@ class SensorTypesController < ApplicationController
             end
         end
     end
+
     def create
         @sensor_type = SensorType.new(params[:sensor_type])
         if @sensor_type.save
@@ -34,6 +49,7 @@ class SensorTypesController < ApplicationController
     def edit
         @sensor_type = SensorType.find(params[:id])
     end
+
     def update
         @sensor_type = SensorType.find(params[:id])
         respond_to do |format|
@@ -47,6 +63,7 @@ class SensorTypesController < ApplicationController
             end
         end
     end
+
     def destroy
         @sensor_type = SensorType.find(params[:id])
         @sensor_type.destroy

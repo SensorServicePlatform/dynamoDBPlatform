@@ -8,7 +8,7 @@ class SensorTypesController < ApplicationController
     def get_sensors_by_type
       @sensor_type = SensorType.find_by_property_type_desc(params[:type])
       if !@sensor_type.nil?
-        @sensors = Sensor.find_all_by_sensor_type_id(@sensor_type.id)
+        @sensors = Sensor.find_all_by_sensor_type_id(@sensor_type.id.to_s)
         if !@sensors.nil?
           sensor_hash = @sensors.map { |s|
             Hash[

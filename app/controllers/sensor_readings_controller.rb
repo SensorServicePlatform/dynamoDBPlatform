@@ -102,18 +102,27 @@ class SensorReadingsController < ApplicationController
     end
   end
 
+  def convert_timestamp_to_millisecond(reading)
+    if (reading["timestamp"].to_i.to_s.length == 10)
+      # timestamp is in seconds, convert it to milliseconds
+      reading["timestamp"] = reading["timestamp"] * 1000
+    end
+  end
+
   def create
     reading_json = request.body.read
     reading_hash = ActiveSupport::JSON.decode(reading_json)
 
     if (reading_hash.is_a? Array)
+      reading_hash.each do |reading|
+        convert_timestamp_to_millisecond(reading)
+        update_last_reading_time(reading)
+      end
       @sensor_reading_table.batch_write(
         :put => reading_hash
       )
-      reading_hash.each do |reading|
-        update_last_reading_time(reading)
-      end
     else
+      convert_timestamp_to_millisecond(reading_hash)
       @sensor_reading_table.items.create(reading_hash)
       update_last_reading_time(reading_hash)
     end

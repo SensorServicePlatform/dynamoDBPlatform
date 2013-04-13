@@ -88,6 +88,18 @@ class SensorReadingsController < ApplicationController
     render :json => json_array
   end
 
+  def get_latest_reading
+    id = params[:id]
+    device = Device.find_by_network_address(id)
+    last_reading_time = device.last_reading_at * 1000
+    reading = @sensor_reading_table.items.query(
+        :hash_value => id,
+        :range_value => last_reading_time..last_reading_time,
+        :select => :all)
+    #reading=  reading.to_a
+    render :json => reading.attributes
+  end
+
   def update_last_reading_time(reading)
     # reading's id is device's network address
     device = Device.find_by_network_address(reading["id"])

@@ -91,13 +91,20 @@ class SensorReadingsController < ApplicationController
   def get_latest_reading
     id = params[:id]
     device = Device.find_by_network_address(id)
-    last_reading_time = device.last_reading_at * 1000
+    if device.nil?
+      render :json => nil
+      return
+    end
+    last_reading_time = device.last_reading_at
     reading = @sensor_reading_table.items.query(
         :hash_value => id,
-        :range_value => last_reading_time..last_reading_time,
+        :range_value => last_reading_time,
         :select => :all)
-    #reading=  reading.to_a
-    render :json => reading.attributes
+    if !reading.nil?
+      render :json => reading.to_a.last.attributes
+    else
+      render :json => nil
+    end
   end
 
   def update_last_reading_time(reading)

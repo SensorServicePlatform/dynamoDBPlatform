@@ -128,6 +128,16 @@ class SensorReadingsController < ApplicationController
     end
   end
 
+  def forward_json(reading_json)
+    uri = URI.parse("http://cmu-sensor-network.herokuapp.com/sensors")
+    post_json_request = Net::HTTP::Post.new(uri.request_uri)
+    post_json_request.add_field("Content-Type", "application/json")
+    post_json_request.body = reading_json
+    http = Net::HTTP::new(uri.host, uri.port)
+    response = http.request(post_json_request)
+    return response
+  end
+
   def create
     reading_json = request.body.read
     reading_hash = ActiveSupport::JSON.decode(reading_json)
@@ -146,6 +156,7 @@ class SensorReadingsController < ApplicationController
       update_last_reading_time(reading_hash)
     end
 
+    forward_json(reading_json)
     render :text => "Success", :status => 200, :content_type => 'text/html'
   end
 

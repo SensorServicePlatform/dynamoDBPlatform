@@ -95,7 +95,7 @@ class SensorReadingsController < ApplicationController
       render :json => nil
       return
     end
-    last_reading_time = device.last_reading_at
+    last_reading_time = device.last_reading_at * 1000 # convert to millisecond
     reading = @sensor_reading_table.items.query(
         :hash_value => id,
         :range_value => last_reading_time,

@@ -13,5 +13,6 @@ CmuSds::Application.routes.draw do
   match '/get_devices' => 'devices#get_devices'
   match '/get_sensors' => 'sensor_types#get_sensors_by_type'
   match '/get_latest_reading' => 'sensor_readings#get_latest_reading'
+  match '/get_last_reading_time_for_all_devices' => 'sensor_readings#get_last_reading_time_for_all_devices'
   match ':controller(/:action(/:id))(.:format)'
 end

@@ -107,6 +107,14 @@ class SensorReadingsController < ApplicationController
     end
   end
 
+  def get_last_reading_time_for_all_devices
+    last_reading_time = Hash.new
+    Device.all.each do |device|
+      last_reading_time[device.network_address] = device.last_reading_at
+    end
+    render :json => last_reading_time
+  end
+
   def update_last_reading_time(reading)
     # reading's id is device's network address
     device = Device.find_by_network_address(reading["id"])

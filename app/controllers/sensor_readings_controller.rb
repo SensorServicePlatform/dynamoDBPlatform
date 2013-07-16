@@ -33,17 +33,16 @@ class SensorReadingsController < ApplicationController
     end_time = params[:end_time].to_i
     number_of_tuples = params[:tuples].to_i
 
-    if end_time > 0
-      # The query method requires a hash_value
-      readings = @sensor_reading_table.items.query(
-          :hash_value => id,
-          :range_value => start_time..end_time,
-          :select => :all)
-    else
-      readings = @sensor_reading_table.items.query(
-          :hash_value => id,
-          :select => :all)
+    if !(start_time > 0 and end_time > start_time)
+      end_time = Time.now.to_i * 1000
+      start_time = end_time - 3600000
     end
+
+    # The query method requires a hash_value
+    readings = @sensor_reading_table.items.query(
+        :hash_value => id,
+        :range_value => start_time..end_time,
+        :select => :all)
 
     # Convert the Enumerator to an Array so that we can index into it.
     # Enumerator.find(id) returns another Enumerator that does not

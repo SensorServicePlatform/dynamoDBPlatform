@@ -33,9 +33,16 @@ class SensorReadingsController < ApplicationController
     end_time = params[:end_time].to_i
     number_of_tuples = params[:tuples].to_i
 
-    if !(start_time > 0 and end_time > start_time)
-      end_time = Time.now.to_i * 1000
-      start_time = end_time - 3600000
+    if !(start_time > 0 and end_time >= start_time)
+      #end_time = Time.now.to_i * 1000
+      #start_time = end_time - 3600000
+      render :json => "{\"error\":\"invalid timestamp\"}"
+      return
+    end
+
+    if (end_time - start_time > 12 * 3600 * 1000)
+      render :json => "{\"error\":\"time range cannot be longer than 12 hours\"}"
+      return
     end
 
     # The query method requires a hash_value

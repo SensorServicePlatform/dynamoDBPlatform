@@ -24,6 +24,7 @@ class SensorReadingsController < ApplicationController
 
   def show
     id = params[:id]
+    # for FireFly readings id is the device id
     # temporary solution to query device location
     device = Device.find_by_network_address(id)
     if !device.nil?
@@ -94,6 +95,8 @@ class SensorReadingsController < ApplicationController
     render :json => json_array
   end
 
+  # retrieves the latest reading of a device specify the device_id in id parameter, eg.
+  #  http://cmu-sds.herokuapp.com/get_latest_reading?id=10170005
   def get_latest_reading
     id = params[:id]
     device = Device.find_by_network_address(id)
@@ -113,6 +116,8 @@ class SensorReadingsController < ApplicationController
     end
   end
 
+  #get_last_reading_time_for_all_devices - get time of the last reading from all devices
+  #eg. http://cmu-sds.herokuapp.com/get_last_reading_time_for_all_devices
   def get_last_reading_time_for_all_devices
     last_reading_time = Hash.new
     Device.all.each do |device|
@@ -142,6 +147,7 @@ class SensorReadingsController < ApplicationController
     end
   end
 
+  # forward the reading to Hana API
   def forward_json(reading_json)
     uri = URI.parse("http://cmu-sensor-network.herokuapp.com/sensors")
     post_json_request = Net::HTTP::Post.new(uri.request_uri)
@@ -161,6 +167,7 @@ class SensorReadingsController < ApplicationController
         convert_timestamp_to_millisecond(reading)
         update_last_reading_time(reading)
       end
+      # write to DynamoDB
       @sensor_reading_table.batch_write(
         :put => reading_hash
       )
@@ -169,7 +176,7 @@ class SensorReadingsController < ApplicationController
       @sensor_reading_table.items.create(reading_hash)
       update_last_reading_time(reading_hash)
     end
-
+    # store the reading in Hana
     forward_json(reading_json)
     render :text => "Success", :status => 200, :content_type => 'text/html'
   end

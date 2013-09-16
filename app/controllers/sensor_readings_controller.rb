@@ -149,7 +149,8 @@ class SensorReadingsController < ApplicationController
 
   # forward the reading to Hana API
   def forward_json(reading_json)
-    uri = URI.parse("http://cmu-sensor-network.herokuapp.com/sensors")
+    #uri = URI.parse("http://cmu-sensor-network.herokuapp.com/sensors")
+    uri = URI.parse("http://209.129.244.9/sensors")
     post_json_request = Net::HTTP::Post.new(uri.request_uri)
     post_json_request.add_field("Content-Type", "application/json")
     post_json_request.body = reading_json

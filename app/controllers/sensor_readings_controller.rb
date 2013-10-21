@@ -178,7 +178,7 @@ class SensorReadingsController < ApplicationController
       update_last_reading_time(reading_hash)
     end
     # store the reading in Hana
-    forward_json(reading_json)
+    #    forward_json(reading_json)
     render :text => "Success", :status => 200, :content_type => 'text/html'
   end
 
